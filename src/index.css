@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* Core Colors */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #161616;
+  --bg-tertiary: #222222;
+
+  --accent-primary: #ff1100;
+  /* Safety Yellow/Orange */
+  --accent-hover: #FFA000;
+  --accent-blue: #00E5FF;
+  /* Tech Blue for secondary highlights */
+
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-inverse: #000000;
+
+  /* Typography */
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
+
+  /* Layout */
+  --max-width: 1400px;
+  --header-height: 80px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  overflow-x: clip;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hide scrollbar for all browsers */
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* Typography Base */
+h1 {
+  font-size: clamp(2.5rem, 10vw, 6rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 7vw, 4rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+h4 {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+p {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-heading);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Common Utilities */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: var(--text-inverse);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255, 184, 0, 0.2);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--text-primary);
+  padding: 1rem 2rem;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background-color: var(--text-primary);
+  color: var(--text-inverse);
+}
+
+/* Hide scrollbar for horizontal scrolling sections */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}

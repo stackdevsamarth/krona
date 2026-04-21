@@ -1,0 +1,32 @@
+.crawler-container {
+  width: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 2rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  white-space: nowrap;
+}
+
+.crawler-track {
+  display: inline-flex;
+}
+
+.crawler-text {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5); /* Stylish outline text */
+  text-transform: uppercase;
+  padding-right: 1rem;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+}
+
+.crawler-container:hover .crawler-text {
+  color: var(--accent-primary); /* Fills with color on hover */
+  -webkit-text-stroke: 1px var(--accent-primary);
+}

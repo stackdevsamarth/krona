@@ -1,0 +1,72 @@
+.legacy-section {
+  position: relative;
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.legacy-bg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.legacy-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.legacy-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.6);
+  z-index: 1;
+}
+
+.legacy-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.legacy-text-wrapper {
+  max-width: 800px;
+}
+
+.legacy-title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+.legacy-text {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-family: var(--font-body);
+}
+
+@media (max-width: 768px) {
+  .legacy-text-wrapper {
+    padding: 0 1rem;
+  }
+}

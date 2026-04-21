@@ -1,0 +1,212 @@
+.accessories-section {
+  position: relative;
+  height: 300vh;
+  /* Provides scroll distance */
+  color: var(--text-primary);
+}
+
+.accessories-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.accessories-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.accessories-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.7);
+  z-index: 1;
+}
+
+.accessories-content-wrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  gap: 4rem;
+  padding-left: max(1rem, calc((100vw - 1400px) / 3));
+}
+
+.accessories-header {
+  flex: 0 0 250px;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+
+.btn-dark {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+  background-color: var(--bg-tertiary);
+  transform: translateY(-2px);
+}
+
+.accessories-carousel-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+.accessories-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  padding-right: 5vw;
+  /* give some padding at the end */
+}
+
+.accessory-card {
+  flex: 0 0 350px;
+  /* Wider cards */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.accessory-img-container {
+  background-color: #f2f2f2;
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.accessory-img-container:hover {
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.accessory-img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  mix-blend-mode: normal;
+  /* Remove multiply since bg is dark */
+}
+
+.accessory-img-container:hover .accessory-img {
+  transform: scale(1.1);
+}
+
+.add-to-cart-btn {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.accessory-img-container:hover .add-to-cart-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.add-to-cart-btn:hover {
+  background-color: var(--bg-primary);
+  color: #fff;
+}
+
+.accessory-info {
+  text-align: center;
+}
+
+.accessory-name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.accessory-price {
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .accessories-section {
+    height: 200vh;
+  }
+
+  .accessories-content-wrapper {
+    flex-direction: column;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    gap: 3rem;
+  }
+
+  .accessories-header {
+    flex: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    text-align: left;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+    margin-bottom: 0;
+  }
+
+  .accessories-carousel-container {
+    width: 100%;
+    overflow: visible;
+  }
+
+  .accessories-track {
+    padding-right: 10vw;
+  }
+
+  .accessory-card {
+    flex: 0 0 280px;
+  }
+
+  .accessory-img-container {
+    padding: 1.5rem;
+  }
+}
