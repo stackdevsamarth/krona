@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { X, Shield, Zap } from 'lucide-react';
 import ContactButton from './ContactButton';
@@ -7,73 +7,240 @@ import './Products.css';
 const productsData = [
   {
     id: 1,
-    name: "KROMA PRO-X",
-    category: "Helmets",
-    subtitle: "Advanced Impact Helmet",
-    specs: "Class E • 450g",
-    image: "https://images.unsplash.com/photo-1662309376159-b95fb193d96b?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aW5kdXN0cmlhbCUyMHNhZmV0eXxlbnwwfHwwfHx8MA%3D%3D",
-    description: "The PRO-X is our flagship industrial helmet, featuring a high-density polyethylene shell and a 6-point suspension system for maximum impact protection and comfort during long shifts.",
-    features: ["Impact Resistant Shell", "6-Point Suspension", "Ventilation Control"]
+    name: "KROMA KA-1",
+    category: "Workwear",
+    subtitle: "High-Visibility Active Vest",
+    specs: "ISO 20471 • Reflective",
+    image: "https://i.postimg.cc/CxYNZyvy/KA.webp",
+    description: "The KA-1 is a high-visibility active vest designed for maximum breathability and safety in low-light industrial environments.",
+    features: ["Breathable Mesh", "4-Way Reflective Strips", "Quick-Access Pockets"]
   },
   {
     id: 2,
-    name: "AERO HARNESS v2",
-    category: "Harnesses",
-    subtitle: "Full Body Fall Protection",
-    specs: "OSHA Compliant • 3 D-Rings",
-    image: "https://images.unsplash.com/photo-1690973692388-239878450c7b?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGluZHVzdHJpYWwlMjBzYWZldHl8ZW58MHx8MHx8fDA%3D",
-    description: "Designed for high-altitude work, the AERO HARNESS v2 combines lightweight breathable mesh with heavy-duty webbing. It features quick-connect buckles and dorsal/side D-rings.",
-    features: ["Breathable Mesh Padding", "Quick-Connect Buckles", "3 D-Ring Support"]
+    name: "KROMA KC-CORE",
+    category: "Workwear",
+    subtitle: "Heavy-Duty Utility Jacket",
+    specs: "Thermal • Water-Resistant",
+    image: "https://i.postimg.cc/x1RPMs7f/KC.webp",
+    description: "Built for extreme weather, the KC-CORE jacket provides thermal insulation and a reinforced outer shell to protect against the elements.",
+    features: ["Thermal Lining", "Reinforced Shoulders", "Windproof Zippers"]
   },
   {
     id: 3,
-    name: "VISON SHIELD",
-    category: "Eyewear",
-    subtitle: "Anti-Fog Safety Goggles",
-    specs: "UV400 • Scratch Resistant",
-    image: "https://images.unsplash.com/photo-1642873965200-4dd3753336b2?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGluZHVzdHJpYWwlMjBzYWZldHl8ZW58MHx8MHx8fDA%3D",
-    description: "Crystal clear vision in the toughest conditions. The VISION SHIELD uses a permanent anti-fog coating and high-impact polycarbonate lenses that exceed ANSI Z87.1 standards.",
-    features: ["Anti-Fog Coating", "Scratch Resistant", "Wide Field of View"]
+    name: "KROMA K-COMPACT",
+    category: "Workwear",
+    subtitle: "Ergonomic Tool Belt",
+    specs: "Adjustable • 12 Slots",
+    image: "https://i.postimg.cc/VLXgLsW3/KCo.webp",
+    description: "An ergonomic tool belt designed to distribute weight evenly across the waist, reducing fatigue during long shifts.",
+    features: ["Padded Waistband", "Modular Attachments", "Heavy-Duty Buckle"]
   },
   {
     id: 4,
-    name: "KROMA TOUGH-G",
+    name: "KROMA KD-X",
     category: "Gloves",
-    subtitle: "Cut-Resistant Grip",
-    specs: "Level 5 Cut • Nitrile Coated",
-    image: "https://images.unsplash.com/photo-1642873965200-4dd3753336b2?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGluZHVzdHJpYWwlMjBzYWZldHl8ZW58MHx8MHx8fDA%3D",
-    description: "Protect your hands from sharp edges without sacrificing dexterity. Our TOUGH-G series features a reinforced nitrile palm for superior grip in oily or wet environments.",
-    features: ["ANSI Level 5 Cut Protection", "Oil-Resistant Grip", "Touchscreen Compatible"]
+    subtitle: "Impact Protection Gloves",
+    specs: "Level 4 Impact • ANSI rated",
+    image: "https://i.postimg.cc/4x51V8MN/KD.webp",
+    description: "The KD-X gloves feature molded TPR back-of-hand protection to shield against heavy impact and vibrations.",
+    features: ["Impact Shielding", "Vibration Dampening", "Secure Wrist Closure"]
   },
   {
     id: 5,
-    name: "TITAN STEP",
+    name: "KROMA KE-LITE",
     category: "Footwear",
-    subtitle: "Steel-Toe Utility Boot",
-    specs: "Waterproof • Slip-Resistant",
-    image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2074&auto=format&fit=crop",
-    description: "Built for the most demanding sites. The TITAN STEP features a premium leather upper, electrical hazard protection, and a deep-lug outsole for ultimate traction.",
-    features: ["Steel Toe Protection", "Electrical Hazard Rated", "Waterproof Leather"]
+    subtitle: "Lightweight Safety Sneaker",
+    specs: "Composite Toe • Anti-Slip",
+    image: "https://i.postimg.cc/13HKwWT6/KE.webp",
+    description: "The KE-LITE combines the comfort of a sneaker with the protection of a safety boot. Perfect for indoor warehouse work.",
+    features: ["Lightweight Sole", "Breathable Fabric", "Composite Safety Toe"]
+  },
+  {
+    id: 6,
+    name: "KROMA KF-FLEX",
+    category: "Gloves",
+    subtitle: "Precision Grip Gloves",
+    specs: "Nitrile Coated • Cut A2",
+    image: "https://i.postimg.cc/0yfCDt30/kf.webp",
+    description: "Designed for high-dexterity tasks, the KF-FLEX provides a superior grip in both wet and dry conditions.",
+    features: ["Ultra-Thin Knit", "Superior Grip", "Skin-Safe Material"]
+  },
+  {
+    id: 7,
+    name: "KROMA KO-PRO",
+    category: "Footwear",
+    subtitle: "All-Terrain Work Boot",
+    specs: "Steel Toe • Waterproof",
+    image: "https://i.postimg.cc/W1jnDR9j/Ko.webp",
+    description: "The KO-PRO is built for the toughest outdoor sites, featuring a waterproof membrane and a deep-tread outsole.",
+    features: ["Steel Toe Box", "Waterproof Membrane", "Self-Cleaning Tread"]
+  },
+  {
+    id: 8,
+    name: "KROMA KP-SHIELD",
+    category: "Workwear",
+    subtitle: "Flame-Resistant Coverall",
+    specs: "NFPA 2112 • ARC Rated",
+    image: "https://i.postimg.cc/0yxf6gVH/KP.webp",
+    description: "Maximum protection for electrical and fire hazards. The KP-SHIELD is treated with advanced flame-resistant technology.",
+    features: ["FR Treated Fabric", "Reinforced Stitching", "Multi-Hazard Protection"]
+  },
+  {
+    id: 9,
+    name: "KROMA KPA-TECH",
+    category: "Footwear",
+    subtitle: "Ankle-Support Safety Boot",
+    specs: "6-inch • Puncture Resistant",
+    image: "https://i.postimg.cc/4NpPN4QP/KPA.webp",
+    description: "Providing superior ankle stability and a puncture-resistant midsole for dangerous environments.",
+    features: ["Padded Collar", "Kevlar Midsole", "Anti-Fatigue Footbed"]
+  },
+  {
+    id: 10,
+    name: "KROMA KPR-RUNNER",
+    category: "Footwear",
+    subtitle: "Athletic Safety Shoe",
+    specs: "ESD Rated • Breathable",
+    image: "https://i.postimg.cc/yY0jY6yG/KPR.webp",
+    description: "Ideal for electronics manufacturing where electrostatic discharge protection is critical.",
+    features: ["ESD Protection", "Memory Foam Insole", "Non-Metallic"]
+  },
+  {
+    id: 11,
+    name: "KROMA KQ-QUICK",
+    category: "Workwear",
+    subtitle: "Fast-Dry Work Shirt",
+    specs: "UPF 50+ • Moisture Wicking",
+    image: "https://i.postimg.cc/6pw07sHy/KQ.webp",
+    description: "Keep cool in the sun. The KQ-QUICK shirt wicks moisture away and protects against UV radiation.",
+    features: ["Moisture Management", "Odor Resistant", "Sun Protection"]
+  },
+  {
+    id: 12,
+    name: "KROMA KR-ROBUST",
+    category: "Workwear",
+    subtitle: "Reinforced Work Pants",
+    specs: "Cordura Knee • Triple Stitched",
+    image: "https://i.postimg.cc/hPVsP41w/KR.webp",
+    description: "Built for heavy lifting and crawling. These pants feature Cordura-reinforced knees and triple-stitched seams.",
+    features: ["Knee Pad Pockets", "Utility Loop", "Abrasion Resistant"]
+  },
+  {
+    id: 13,
+    name: "KROMA AD-ULTRA",
+    category: "Gloves",
+    subtitle: "Cold-Weather Thermal Glove",
+    specs: "Thinsulate • -20°C Rated",
+    image: "https://i.postimg.cc/KY8DNPSn/krome-AD.webp",
+    description: "Work comfortably in freezing temperatures with Thinsulate lining and a wind-blocking outer shell.",
+    features: ["Thermal Insulation", "Waterproof Insert", "Grip Palm"]
+  },
+  {
+    id: 14,
+    name: "KROMA K-TOUGH",
+    category: "Gloves",
+    subtitle: "General Purpose Work Glove",
+    specs: "Micro-Foam • Breathable",
+    image: "https://i.postimg.cc/N0jk46q7/Krome-T.webp",
+    description: "The versatile choice for everyday tasks, offering a perfect balance of protection and dexterity.",
+    features: ["Micro-Foam Coating", "Ergonomic Fit", "Washable"]
+  },
+  {
+    id: 15,
+    name: "KROMA KS-SPEC",
+    category: "Gloves",
+    subtitle: "Specialized Handling Glove",
+    specs: "Chemical Resistant • ANSI A4",
+    image: "https://i.postimg.cc/DwgcLCD5/ks.webp",
+    description: "High-level chemical resistance combined with cut protection for hazardous material handling.",
+    features: ["Chemical Barrier", "Extended Cuff", "Textured Grip"]
+  },
+  {
+    id: 16,
+    name: "KROMA KST-STATIC",
+    category: "Footwear",
+    subtitle: "Anti-Static Safety Clog",
+    specs: "Cleanroom Safe • Autoclavable",
+    image: "https://i.postimg.cc/x1RPMs7q/Kst.webp",
+    description: "Perfect for laboratories and pharmaceutical environments where static control and cleanliness are vital.",
+    features: ["Static Dissipative", "Easy Sterilization", "Slip Resistant"]
+  },
+  {
+    id: 17,
+    name: "KROMA KTA-ARMOR",
+    category: "Workwear",
+    subtitle: "Tactical Response Vest",
+    specs: "Modular • High Load",
+    image: "https://i.postimg.cc/x1YRkrsS/KTA.webp",
+    description: "A high-load tactical vest designed for rapid response and emergency management teams.",
+    features: ["MOLLE Compatible", "Reinforced Drag Handle", "Quick Release"]
+  },
+  {
+    id: 18,
+    name: "KROMA KV-VISUAL",
+    category: "Workwear",
+    subtitle: "Enhanced Visibility Jacket",
+    specs: "Class 3 • Weatherproof",
+    image: "https://i.postimg.cc/MpDYVs4j/KV.webp",
+    description: "The ultimate visibility solution for highway and airport ground crews.",
+    features: ["Class 3 Standards", "Radio Loops", "Detachable Hood"]
+  },
+  {
+    id: 19,
+    name: "KROMA KZ-ZERO",
+    category: "Footwear",
+    subtitle: "Zero-Gravity Safety Boot",
+    specs: "Composite • Ultra-Light",
+    image: "https://i.postimg.cc/2SmwqpHj/KZ.webp",
+    description: "Using advanced aerospace materials to create the lightest safety boot on the market.",
+    features: ["Carbon Fiber Toe", "Weightless Sole", "Sport Fit"]
+  },
+  {
+    id: 20,
+    name: "KROMA KZE-X",
+    category: "Gloves",
+    subtitle: "Extreme Cut Shield",
+    specs: "ANSI A9 • Highest Protection",
+    image: "https://i.postimg.cc/QdsbBLf2/Kze.webp",
+    description: "When only the highest level of protection will do. Designed for metal fabrication and glass handling.",
+    features: ["Maximum Cut Resistance", "Heat Resistant", "Steel Fiber Reinforced"]
   }
 ];
 
-const categories = ["All", "Helmets", "Harnesses", "Eyewear", "Gloves", "Footwear"];
+const categories = ["All", "Footwear", "Workwear", "Gloves",];
 
 const Products = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [scrollAmount, setScrollAmount] = useState(0);
   const targetRef = useRef(null);
+  const trackRef = useRef(null);
 
-  const filteredProducts = activeCategory === "All"
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (trackRef.current) {
+      const width = trackRef.current.scrollWidth;
+      const viewport = window.innerWidth;
+      setScrollAmount(Math.max(0, width - viewport));
+    }
+  }, [activeCategory, isMobile]);
+
+  const filteredProducts = (activeCategory === "All"
     ? productsData
-    : productsData.filter(p => p.category === activeCategory);
+    : productsData.filter(p => p.category === activeCategory)).slice(0, 10);
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
   });
 
-  const scrollDistance = filteredProducts.length > 1 ? `-${(filteredProducts.length - 1) * 30}%` : "0%";
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", scrollDistance]);
+  const x = useTransform(scrollYProgress, [0, 1], [0, -scrollAmount]);
 
   return (
     <section className="products-section" id="products" ref={targetRef}>
@@ -121,7 +288,11 @@ const Products = () => {
           </div>
 
           <div className="products-carousel-container">
-            <motion.div style={{ x }} className="products-track">
+            <motion.div
+              ref={trackRef}
+              style={{ x }}
+              className="products-track"
+            >
               <AnimatePresence mode='wait'>
                 {filteredProducts.map((product) => (
                   <motion.div
@@ -131,23 +302,16 @@ const Products = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.4 }}
                     onClick={() => setSelectedProduct(product)}
                   >
                     <div className="product-image-container">
                       <img src={product.image} alt={product.name} className="product-image" />
                     </div>
                     <div className="product-info">
-                      <div className="product-logo-wrapper">
-                        <h3 className="product-name">{product.name}</h3>
-                      </div>
-                      <div className="product-specs-bar">
-                        <div className="specs-text">
-                          <span>{product.subtitle}</span>
-                          <span className="specs-divider">|</span>
-                          <span>{product.specs}</span>
-                        </div>
-                        <button className="btn-primary product-buy-btn">View Details</button>
+                      <h3 className="product-name">{product.name}</h3>
+                      <div className="product-mobile-meta">
+                        <span className="mobile-specs">{product.specs}</span>
+                        <button className="mobile-view-btn">VIEW DETAILS</button>
                       </div>
                     </div>
                   </motion.div>
